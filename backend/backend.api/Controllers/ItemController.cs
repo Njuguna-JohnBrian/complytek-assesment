@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using backend.api.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace backend.api.Controllers;
 
@@ -7,21 +8,37 @@ namespace backend.api.Controllers;
 [Produces("application/json")]
 public class ItemController : ControllerBase
 {
-    public ItemController()
+    private readonly ItemService _itemService;
+
+    public ItemController(ItemService itemService)
     {
+        _itemService = itemService;
     }
 
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public Task<IActionResult> GetItems()
+    public async Task<IActionResult> GetItemsAsync()
     {
-        return Task.FromResult<IActionResult>(Ok());
+        var items = await _itemService.GetItems();
+        if (items.Count == 0)
+            return new EmptyResult();
+
+        return Ok(
+            items.Select(itm => new
+            {
+                itm.ItemId,
+                itm.ItemName,
+                itm.ItemDescription,
+                itm.IsComplete,
+                itm.CreatedDtm
+            })
+        );
     }
-    
-    
+
+
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public Task<IActionResult> AddItems()
+    public Task<IActionResult> AddItemsAsync()
     {
         return Task.FromResult<IActionResult>(Ok());
     }
