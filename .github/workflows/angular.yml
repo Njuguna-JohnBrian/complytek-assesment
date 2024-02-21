@@ -33,6 +33,10 @@ jobs:
         run: npm run build --if-present
         working-directory: frontend
 
+      - name: Modify Karma Server
+        run: sed -i -z "s/ removeAllListeners()\n/ removeAllListeners();process.nextTick(() => process.exit(code || 0));\n/g" node_modules/karma/lib/server.js
+        working-directory: frontend
+
       - name: Test Angular app
-        run: npm run test --if-present
+        run: npm test -- --watch=false --browsers=ChromeHeadless
         working-directory: frontend
