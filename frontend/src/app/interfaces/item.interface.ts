@@ -1,7 +1,8 @@
 export interface ItemInterface {
+  id: number;
   itemId: string;
   itemName: string;
   itemDescription: string;
-  isComplete: boolean;
   createdDtm: string;
+  factorial?: string;
 }
