@@ -53,7 +53,7 @@ export class AppComponent implements OnInit {
         this.items = res;
       },
       error: (error) => {
-        console.error('Error fetching items:', error);
+        alert('Failed get items. Please retry');
       },
     });
   }
@@ -69,9 +69,10 @@ export class AppComponent implements OnInit {
         this.itemForm.reset();
         this.closeModal();
         this.items = [...this.items, res];
+        alert('Item created successfully');
       },
       error: (error) => {
-        console.log(error);
+        alert('Failed create item. Please retry');
       },
     });
   }
@@ -81,12 +82,14 @@ export class AppComponent implements OnInit {
       next: (res: Array<FactorialInterface>) => {
         this.factorials = res;
         this.items = this.items.map((it) => {
-          console.log(it);
           it.factorial = this.factorials.find(
             (fc) => String(fc.itemId) === String(it.id),
           )?.factorial;
           return it;
         });
+      },
+      error: () => {
+        alert('Failed to calculate Factorial. Please retry');
       },
     });
   }
