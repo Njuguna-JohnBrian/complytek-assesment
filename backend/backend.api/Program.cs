@@ -1,4 +1,5 @@
 using backend.api.Database;
+using backend.api.Database.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -36,6 +37,19 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Seed the database
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+    var dbContext = services.GetRequiredService<DatabaseContext>();
+
+    // Apply any pending migrations
+    dbContext.Database.Migrate();
+
+    // Seed the database
+    Seeder.Seed(dbContext);
+}
 
 app.MapControllers();
 
