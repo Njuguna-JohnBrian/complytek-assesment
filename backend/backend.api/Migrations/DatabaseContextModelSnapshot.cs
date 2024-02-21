@@ -26,13 +26,14 @@ namespace backend.api.Migrations
                     b.Property<DateTime?>("CreatedDtm")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsComplete")
+                    b.Property<bool?>("IsComplete")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ItemDescription")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("ItemId")
+                    b.Property<Guid?>("ItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
