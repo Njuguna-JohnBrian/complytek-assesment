@@ -4,7 +4,9 @@
 
 - __List Items__
 
-- __Calculate factorial__
+- __Calculate & Get Factorial__
+-  __Frontend Unit Tests__
+-  __Backend Unit Tests__
 
 # Get Code
 
