@@ -146,7 +146,7 @@ Clone the project
 | `factorial` | `string` ||
 
 
-## Authors
+## Author
 
 - [@Njuguna John Brian Ngugi](https://github.com/Njuguna-JohnBrian)
 
