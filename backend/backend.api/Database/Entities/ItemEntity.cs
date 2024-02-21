@@ -4,11 +4,10 @@ namespace backend.api.Database.Entities;
 
 public sealed class ItemEntity
 {
-    [Key] public long Id { get; init; }
-    [Required] public Guid ItemId { get; init; }
-    [Required] public string ItemName { get; init; }
-    public string? ItemDescription { get; init; } = string.Empty;
-    public bool IsComplete { get; init; }
+    [Key] public long Id { get; set; }
+    [Required] public Guid ItemId { get; set; }
+    [Required] public string ItemName { get; set; }
+    public string? ItemDescription { get; set; } = string.Empty;
+    public bool IsComplete { get; set; }
    public DateTime? CreatedDtm { get; set; } = DateTime.Now;
-    [Timestamp] public byte[] RowVersion { get; set; }
 }

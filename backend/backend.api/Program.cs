@@ -1,10 +1,12 @@
 using backend.api.Database;
 using backend.api.Database.Seed;
+using backend.api.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<ItemService>();
 
 builder.Services.AddControllers();
 

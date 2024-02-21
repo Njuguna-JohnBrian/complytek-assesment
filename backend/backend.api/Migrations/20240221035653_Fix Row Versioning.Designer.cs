@@ -11,8 +11,8 @@ using backend.api.Database;
 namespace backend.api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240221024918_Update Database Columns")]
-    partial class UpdateDatabaseColumns
+    [Migration("20240221035653_Fix Row Versioning")]
+    partial class FixRowVersioning
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,28 +26,26 @@ namespace backend.api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CreatedDtm")
+                    b.Property<DateTime?>("CreatedDtm")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsComplete")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ItemDescription")
+                        .HasColumnType("TEXT");
+
                     b.Property<Guid>("ItemId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("ItemName")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<byte[]>("RowVersion")
-                        .IsConcurrencyToken()
-                        .IsRequired()
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("BLOB");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ItemEntities");
+                    b.ToTable("Items", (string)null);
                 });
 #pragma warning restore 612, 618
         }

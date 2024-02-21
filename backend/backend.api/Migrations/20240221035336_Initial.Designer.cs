@@ -11,7 +11,7 @@ using backend.api.Database;
 namespace backend.api.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240220191943_Initial")]
+    [Migration("20240221035336_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -26,12 +26,32 @@ namespace backend.api.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("ItemId")
+                    b.Property<DateTime?>("CreatedDtm")
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsComplete")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ItemDescription")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ItemName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("RowVersion")
+                        .IsConcurrencyToken()
+                        .IsRequired()
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("BLOB");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ItemEntities");
+                    b.ToTable("Items", (string)null);
                 });
 #pragma warning restore 612, 618
         }
