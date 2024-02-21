@@ -9,6 +9,7 @@ public class ItemConfig : IEntityTypeConfiguration<ItemEntity>
     public void Configure(EntityTypeBuilder<ItemEntity> builder)
     {
         builder.ToTable("Items");
-        builder.Property(it => it.Id).ValueGeneratedOnAdd();
+        builder.Property(it => it.RowVersion).IsRowVersion();
+        builder.Property(it => it.ItemId).ValueGeneratedOnAdd();
     }
 }
