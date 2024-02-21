@@ -6,7 +6,19 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var corsPolicyName = "Cors Policy";
+
 builder.Services.AddScoped<ItemService>();
+
+builder.Services.AddCors(crs =>
+{
+    crs.AddPolicy(name: corsPolicyName, builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
 
@@ -52,6 +64,8 @@ using (var serviceScope = app.Services.CreateScope())
     // Seed the database
     Seeder.Seed(dbContext);
 }
+
+app.UseCors(corsPolicyName);
 
 app.MapControllers();
 
