@@ -19,9 +19,9 @@ namespace backend.api.Database.Seed
             {
                 Id = 1,
                 ItemId = Guid.NewGuid(),
-                ItemName = "Convertible Car",
+                ItemName = "Get groceries",
                 ItemDescription =
-                    "This convertible car is fast! The engine is powered by a neutrino based battery (not included). Power it up and let it go!"
+                    "get groceries at 2 am"
             };
 
             // Check if the item exists in the database
