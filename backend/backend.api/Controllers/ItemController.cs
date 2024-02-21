@@ -1,4 +1,5 @@
-﻿using backend.api.Services;
+﻿using backend.api.Dtos;
+using backend.api.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.api.Controllers;
@@ -26,10 +27,10 @@ public class ItemController : ControllerBase
         return Ok(
             items.Select(itm => new
             {
+                itm.Id,
                 itm.ItemId,
                 itm.ItemName,
                 itm.ItemDescription,
-                itm.IsComplete,
                 itm.CreatedDtm
             })
         );
@@ -38,8 +39,30 @@ public class ItemController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public Task<IActionResult> AddItemsAsync()
+    [ProducesResponseType(StatusCodes.Status409Conflict)]
+    public async Task<IActionResult> AddItemsAsync([FromBody] ItemDto itemDto)
     {
-        return Task.FromResult<IActionResult>(Ok());
+        var itemExists = await _itemService.ItemExists(itemDto.ItemName);
+        if (itemExists != null)
+            return Conflict($"An item with the name {itemDto.ItemName} already exists");
+
+        var item = await _itemService.AddItem(itemDto);
+        return Ok(new
+        {
+            item.Id,
+            item.ItemId,
+            item.ItemName,
+            item.ItemDescription,
+            item.CreatedDtm
+        });
+    }
+
+    [HttpGet]
+    [Route("factorial")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetFactorialsAsync()
+    {
+        var factorials = await _itemService.CalculateFactorials();
+        return Ok(factorials);
     }
 }
