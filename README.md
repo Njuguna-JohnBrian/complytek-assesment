@@ -8,6 +8,11 @@
 -  __Frontend Unit Tests__
 -  __Backend Unit Tests__
 
+
+[![.NET WorkFlow](https://github.com/Njuguna-JohnBrian/complytek-assesment/actions/workflows/dotnet.yml/badge.svg?branch=master&event=deployment_status)](https://github.com/Njuguna-JohnBrian/complytek-assesment/actions/workflows/dotnet.yml)
+
+[![Angular Workflow](https://github.com/Njuguna-JohnBrian/complytek-assesment/actions/workflows/angular.yml/badge.svg)](https://github.com/Njuguna-JohnBrian/complytek-assesment/actions/workflows/angular.yml)
+
 # Get Code
 
 Clone the project
